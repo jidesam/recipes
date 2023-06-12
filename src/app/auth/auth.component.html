@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <div *ngIf="isloading" style="text-align: center ;">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <!-- <div class="alert alert-danger" *ngIf="error">{{error}}</div> -->
+        <!-- <app-alert [message]="error" *ngIf="error"
+        (onClose)="onHandleError()"
+        ></app-alert> -->
+
+          <ng-template app-place-holder></ng-template>
+      <form [formGroup]="signinForm" *ngIf="!isloading">
+        <div class="form-group">
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" class="form-control" formControlName="email"/>
+          <p class="text-danger" *ngIf="signinForm.get('email').invalid &&  signinForm.get('email').touched ">email is required</p>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" formControlName="password" />
+          <p class="text-danger" *ngIf="signinForm.get('password').invalid &&  signinForm.get('password').touched ">password is required</p>
+        </div>
+        <div>
+          <button [disabled]="!signinForm.valid" (click)="onAuthenticate()" class="btn btn-primary" type="submit">{{isLoggedIn? 'Login' : 'Sign Up'}}</button> |
+          <button class="btn btn-primary" type="button" (click)="onSwitchMode()">{{isLoggedIn? 'switch to Sign Up' : ' switch to Login'}}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
